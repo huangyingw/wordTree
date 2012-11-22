@@ -52,7 +52,7 @@ public class Trie {
 	}
 
 	private int countPrefixes(Vertex vertex, String prefixSegment) {
-		if (prefixSegment.length() == 0) { // reach the last character of the
+		if (prefixSegment.length() == 1) { // reach the last character of the
 											// word
 			return vertex.prefixes;
 		}
