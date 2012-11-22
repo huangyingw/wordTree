@@ -100,7 +100,7 @@ public class Trie {
 			vertex.prefixes++;
 			char c = word.charAt(0);
 			if (!vertex.edges.containsKey(c)) { // if the edge does NOT exist
-				vertex.edges.put(c, new Vertex());
+				vertex.edges.put(c, new Vertex(c));
 			}
 			addWord(vertex.edges.get(c), word.substring(1)); // go the the next
 																// character
@@ -133,8 +133,8 @@ public class Trie {
 			System.out.println(s);
 		}
 
-		int count = trie.countPrefixes("ch");
-		int count1 = trie.countWords("china");
+		int count = trie.countPrefixes("Ch");
+		int count1 = trie.countWords("China");
 		System.out.println("the count of c prefixes:" + count);
 		System.out.println("the count of china countWords:" + count1);
 	}
