@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Trie {
 
-	private Vertex root;// 一个Trie树有一个根节点
+	private Vertex root;
 
 	public Trie() {
 		root = new Vertex();

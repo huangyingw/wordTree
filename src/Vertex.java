@@ -1,9 +1,8 @@
 
-// 内部类
-class Vertex {// 节点类
+class Vertex {
 	protected int words;
 	protected int prefixes;
-	protected Vertex[] edges;// 每个节点包含26个子节点(类型为自身)
+	protected Vertex[] edges;
 
 	Vertex() {
 		words = 0;
