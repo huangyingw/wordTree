@@ -1,6 +1,9 @@
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
 
 public class Trie {
 
@@ -13,27 +16,31 @@ public class Trie {
 	public List<String> listAllWords() {
 
 		List<String> words = new ArrayList<String>();
-		Vertex[] edges = root.edges;
+		Map<Character, Vertex> edges = root.edges;
 
-		for (int i = 0; i < edges.length; i++) {
-			if (edges[i] != null) {
-				String word = "" + (char) ('a' + i);
-				depthFirstSearchWords(words, edges[i], word);
-			}
+		Iterator<Entry<Character, Vertex>> iter = edges.entrySet().iterator();
+		while (iter.hasNext()) {
+			Map.Entry entry = (Map.Entry) iter.next();
+			Character key = (Character) entry.getKey();
+			Vertex val = (Vertex) entry.getValue();
+			String word = "" + key;
+			depthFirstSearchWords(words, val, word);
 		}
 		return words;
 	}
 
 	private void depthFirstSearchWords(List words, Vertex vertex,
 			String wordSegment) {
-		Vertex[] edges = vertex.edges;
+		HashMap<Character, Vertex> edges = vertex.edges;
 		boolean hasChildren = false;
-		for (int i = 0; i < edges.length; i++) {
-			if (edges[i] != null) {
-				hasChildren = true;
-				String newWord = wordSegment + (char) ('a' + i);
-				depthFirstSearchWords(words, edges[i], newWord);
-			}
+		Iterator<Entry<Character, Vertex>> iter = edges.entrySet().iterator();
+		while (iter.hasNext()) {
+			hasChildren = true;
+			Map.Entry entry = (Map.Entry) iter.next();
+			Character key = (Character) entry.getKey();
+			Vertex val = (Vertex) entry.getValue();
+			String newWord = wordSegment + key;
+			depthFirstSearchWords(words, val, newWord);
 		}
 		if (!hasChildren) {
 			words.add(wordSegment);
@@ -51,12 +58,11 @@ public class Trie {
 		}
 
 		char c = prefixSegment.charAt(0);
-		int index = c - 'a';
-		if (vertex.edges[index] == null) { // the word does NOT exist
+		if (!vertex.edges.containsKey(c)) { // the word does NOT exist
 			return 0;
 		} else {
 
-			return countPrefixes(vertex.edges[index],
+			return countPrefixes(vertex.edges.get(c),
 					prefixSegment.substring(1));
 
 		}
@@ -73,11 +79,10 @@ public class Trie {
 		}
 
 		char c = wordSegment.charAt(0);
-		int index = c - 'a';
-		if (vertex.edges[index] == null) { // the word does NOT exist
+		if (!vertex.edges.containsKey(c)) { // the word does NOT exist
 			return 0;
 		} else {
-			return countWords(vertex.edges[index], wordSegment.substring(1));
+			return countWords(vertex.edges.get(c), wordSegment.substring(1));
 
 		}
 
@@ -94,13 +99,10 @@ public class Trie {
 		} else {
 			vertex.prefixes++;
 			char c = word.charAt(0);
-			c = Character.toLowerCase(c);
-			int index = c - 'a';
-			if (vertex.edges[index] == null) { // if the edge does NOT exist
-				vertex.edges[index] = new Vertex();
+			if (!vertex.edges.containsKey(c)) { // if the edge does NOT exist
+				vertex.edges.put(c, new Vertex());
 			}
-
-			addWord(vertex.edges[index], word.substring(1)); // go the the next
+			addWord(vertex.edges.get(c), word.substring(1)); // go the the next
 																// character
 		}
 	}
