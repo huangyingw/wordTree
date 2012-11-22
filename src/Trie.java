@@ -135,7 +135,7 @@ public class Trie {
 
 		int count = trie.countPrefixes("Ch");
 		int count1 = trie.countWords("China");
-		System.out.println("the count of c prefixes:" + count);
-		System.out.println("the count of china countWords:" + count1);
+		System.out.println("the count of Ch prefixes:" + count);
+		System.out.println("the count of China countWords:" + count1);
 	}
 }
