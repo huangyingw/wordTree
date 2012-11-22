@@ -2,44 +2,13 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 
-/** */
-/**
- * A word trie which can only deal with 26 alphabeta letters.
- * 
- * @author Leeclipse
- * @since 2007-11-21
- */
-
 public class Trie {
 
 	private Vertex root;// 一个Trie树有一个根节点
 
-	// 内部类
-	protected class Vertex {// 节点类
-		protected int words;
-		protected int prefixes;
-		protected Vertex[] edges;// 每个节点包含26个子节点(类型为自身)
-
-		Vertex() {
-			words = 0;
-			prefixes = 0;
-			edges = new Vertex[26];
-			for (int i = 0; i < edges.length; i++) {
-				edges[i] = null;
-			}
-		}
-	}
-
 	public Trie() {
 		root = new Vertex();
 	}
-
-	/** */
-	/**
-	 * List all words in the Trie.
-	 * 
-	 * @return
-	 */
 
 	public List<String> listAllWords() {
 
@@ -54,15 +23,6 @@ public class Trie {
 		}
 		return words;
 	}
-
-	/** */
-	/**
-	 * Depth First Search words in the Trie and add them to the List.
-	 * 
-	 * @param words
-	 * @param vertex
-	 * @param wordSegment
-	 */
 
 	private void depthFirstSearchWords(List words, Vertex vertex,
 			String wordSegment) {
@@ -123,27 +83,9 @@ public class Trie {
 
 	}
 
-	/** */
-	/**
-	 * Add a word to the Trie.
-	 * 
-	 * @param word
-	 *            The word to be added.
-	 */
-
 	public void addWord(String word) {
 		addWord(root, word);
 	}
-
-	/** */
-	/**
-	 * Add the word from the specified vertex.
-	 * 
-	 * @param vertex
-	 *            The specified vertex.
-	 * @param word
-	 *            The word to be added.
-	 */
 
 	private void addWord(Vertex vertex, String word) {
 		if (word.length() == 0) { // if all characters of the word has been
@@ -193,6 +135,5 @@ public class Trie {
 		int count1 = trie.countWords("china");
 		System.out.println("the count of c prefixes:" + count);
 		System.out.println("the count of china countWords:" + count1);
-
 	}
 }
