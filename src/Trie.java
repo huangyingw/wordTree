@@ -43,8 +43,7 @@ public class Trie {
 			Map.Entry entry = (Map.Entry) iter.next();
 			Character key = (Character) entry.getKey();
 			Vertex val = (Vertex) entry.getValue();
-			String newWord = wordSegment + key;
-			depthFirstSearchWords(words, val, newWord);
+			depthFirstSearchWords(words, val, wordSegment + key);
 		}
 		if (!hasChildren) {
 			words.add(wordSegment);
