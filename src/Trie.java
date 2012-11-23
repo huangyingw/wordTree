@@ -1,3 +1,6 @@
+import java.io.BufferedReader;
+import java.io.FileReader;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -89,6 +92,24 @@ public class Trie {
 
 	}
 
+	private void initTrie() throws IOException {
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new FileReader("data.txt"));
+
+			String line = null;
+			while ((line = in.readLine()) != null) {
+				String[] wordlist = line.split(",");
+				for (String word : wordlist) {
+					addWord(word);
+				}
+			}
+		} finally {
+			if (in != null)
+				in.close();
+		}
+	}
+
 	public void addWord(String word) {
 		addWord(root, word);
 	}
@@ -108,21 +129,11 @@ public class Trie {
 		}
 	}
 
-	public static void main(String args[]) // Just used for test
+	public static void main(String args[]) throws IOException // Just used for
+																// test
 	{
 		Trie trie = new Trie();
-		trie.addWord("China");
-		trie.addWord("China");
-		trie.addWord("China");
-
-		trie.addWord("crawl");
-		trie.addWord("crime");
-		trie.addWord("ban");
-		trie.addWord("China");
-
-		trie.addWord("english");
-		trie.addWord("establish");
-		trie.addWord("eat");
+		trie.initTrie();
 		System.out.println(trie.root.prefixes);
 		System.out.println(trie.root.words);
 
