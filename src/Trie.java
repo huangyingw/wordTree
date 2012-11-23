@@ -8,6 +8,7 @@ import java.util.Map.Entry;
 public class Trie {
 
 	private Vertex root;
+	private final static String filepath = "data.txt";
 
 	public Trie() {
 		root = new Vertex();
